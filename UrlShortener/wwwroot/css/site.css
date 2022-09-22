@@ -1,0 +1,36 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+form {
+    display: inline-block;
+    margin-top: 5%
+}
+
+td {
+    line-height: 150px;
+    text-align: left;
+    font-size: x-large;
+    margin-top: 50px;
+}
+
+th {
+    text-align: left;
+    font-size: x-large;
+}
