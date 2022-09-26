@@ -14,7 +14,7 @@ builder.Services.AddTransient<IValidator<UrlViewModel>, UrlValidator>();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();

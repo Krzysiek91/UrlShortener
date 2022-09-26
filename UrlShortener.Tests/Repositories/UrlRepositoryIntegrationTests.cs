@@ -7,7 +7,7 @@ namespace UrlShortener.Tests.Repositories
     public class UrlRepositoryIntegrationTests
     {
         [Fact]
-        public async Task SaveUrlAsyncShouldInsertUrlToSqliteDatabase()
+        public async Task SaveUrlAsync_ShouldInsertUrlToSqliteDatabase()
         {
             var dbConnection = "Data Source=IntegrationDatabase\\UrlShortenerDB.db";
             var repo = new UrlRepository(dbConnection);

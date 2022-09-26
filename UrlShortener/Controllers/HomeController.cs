@@ -12,6 +12,7 @@ namespace UrlShortener.Controllers
         private readonly IEncodingService _encodingService;
         private readonly IConfiguration _configuration;
         private readonly IValidator<UrlViewModel> _validator;
+        private readonly bool _isDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
 
         public HomeController(IUrlRepository urlRepo, IEncodingService encodingService, IConfiguration configuration, IValidator<UrlViewModel> validator)
         {
@@ -58,8 +59,7 @@ namespace UrlShortener.Controllers
                 }
 
                 var encodedString = _encodingService.EncodeIntigerToString(id);
-                var isDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
-                var domain = isDevelopment ? Request.Host.Value : _configuration.GetSection("ApplicationDomain").Value;
+                var domain = _isDevelopment ? Request.Host.Value : _configuration.GetSection("ApplicationDomain").Value;
                 var shortUrl = $"https://{domain}/{encodedString}";
 
                 url.ShortUrl = shortUrl;

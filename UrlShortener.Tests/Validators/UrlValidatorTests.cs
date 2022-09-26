@@ -42,5 +42,21 @@ namespace UrlShortener.Tests.Validators
             Action method = () => validator.IsValid(vm);
             method.Should().Throw<ArgumentException>();
         }
+
+        [Fact]
+        public void IsValid_GivenUrlWithTooManyCharacters_ShouldThrowException()
+        {
+            var bigString = new string('t', 70000);
+            var url = $"https://www/{bigString}.com";
+
+            var validator = new UrlValidator();
+            var vm = new UrlViewModel
+            {
+                OriginalUrl = url
+            };
+
+            Action method = () => validator.IsValid(vm);
+            method.Should().Throw<ArgumentException>();
+        }
     }
 }

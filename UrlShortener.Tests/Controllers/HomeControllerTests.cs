@@ -45,14 +45,14 @@ namespace UrlShortener.Tests.Controllers
         }
 
         [Fact]
-        public void RedirectToOriginalShouldBeDecoratedWithGetAttribute()
+        public void RedirectToOriginal_ShouldBeDecoratedWithGetAttribute()
         {
             var method = typeof(HomeController).GetMethod("RedirectToOriginal");
             method.Should().BeDecoratedWith<HttpGetAttribute>(atr => atr.Template == "{encodedString}");
         }
 
         [Fact]
-        public async Task RedirectToOriginalShouldReturnRedirectActionResultAndMakeExpectedCalls()
+        public async Task RedirectToOriginal_ShouldReturnRedirectActionResultAndMakeExpectedCalls()
         {
             A.CallTo(() => _encodingService.DecodeStringToIntiger("abcd")).Returns(5);
             A.CallTo(() => _repo.GetUrlByIdAsync(5)).Returns("https://www.google.com");
@@ -67,7 +67,7 @@ namespace UrlShortener.Tests.Controllers
         }
 
         [Fact]
-        public async Task RedirectToOriginalWhenDecodeStringToIntigerThrowsExceptionShouldReturnErrorView()
+        public async Task RedirectToOriginal_WhenDecodeStringToIntigerThrowsException_ShouldReturnErrorView()
         {
             A.CallTo(() => _encodingService.DecodeStringToIntiger(A<string>.Ignored)).Throws(new Exception());
             A.CallTo(() => _repo.GetUrlByIdAsync(5)).Returns("https://www.google.com");
@@ -81,7 +81,7 @@ namespace UrlShortener.Tests.Controllers
         }
 
         [Fact]
-        public async Task RedirectToOriginalWhenGetUrlByIdAsyncThrowsExceptionShouldReturnErrorView()
+        public async Task RedirectToOriginal_WhenGetUrlByIdAsyncThrowsException_ShouldReturnErrorView()
         {
             A.CallTo(() => _encodingService.DecodeStringToIntiger("abcd")).Returns(5);
             A.CallTo(() => _repo.GetUrlByIdAsync(5)).Throws(new Exception());
@@ -95,14 +95,14 @@ namespace UrlShortener.Tests.Controllers
         }
 
         [Fact]
-        public void ShortenUrlShouldBeDecoratedWithGetAttribute()
+        public void ShortenUrl_ShouldBeDecoratedWithGetAttribute()
         {
             var method = typeof(HomeController).GetMethod("ShortenUrl");
             method.Should().BeDecoratedWith<HttpPostAttribute>();
         }
 
         [Fact]
-        public async Task ShortenUrlGivenValidUrlShouldReturnViewAndMakeExpectedCalls()
+        public async Task ShortenUrl_GivenValidUrl_ShouldReturnViewAndMakeExpectedCalls()
         {
             var url = new UrlViewModel
             {
@@ -127,7 +127,7 @@ namespace UrlShortener.Tests.Controllers
         }
 
         [Fact]
-        public async Task ShortenUrlGivenInvalidUrlShouldReturnErrorView()
+        public async Task ShortenUrl_GivenInvalidUrl_ShouldReturnErrorView()
         {
             var url = new UrlViewModel
             {
